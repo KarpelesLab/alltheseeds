@@ -33,3 +33,15 @@ npm run build    # static site in dist/
 ```
 
 Pushing to `master` builds and deploys to GitHub Pages via `.github/workflows/pages.yml`.
+
+## SEO / social previews
+
+`build/seo.js` (a Vite plugin) injects per-page `<title>`, description, canonical URL, OpenGraph/Twitter tags and JSON-LD, adds a crawlable `<noscript>` summary (with real example rows) to each viewer page, and emits `sitemap.xml` and `robots.txt`.
+Absolute URLs come from `SITE_URL` (default `https://karpeleslab.github.io/alltheseeds/`); set it in the workflow if a custom domain is added.
+
+OpenGraph images in `public/og/` are pre-rendered and committed. To regenerate them:
+
+```sh
+npm i --no-save playwright && npx playwright install chromium
+node scripts/make-og.mjs
+```
