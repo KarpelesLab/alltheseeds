@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>All The Seeds</title>
+  <meta name="description" content="Every possible BIP39 seed phrase, in order, with its Bitcoin and Ethereum addresses.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='%23f2a93b'/%3E%3C/svg%3E">
+</head>
+<body class="home-page">
+  <main class="home">
+    <h1 class="brand big">all<b>the</b>seeds</h1>
+    <p class="lede">Every BIP39 seed phrase that can exist, listed in order, with the Bitcoin and Ethereum addresses it controls. Yours is in here somewhere.</p>
+
+    <div class="choices" id="choices"></div>
+
+    <section class="explain">
+      <h2>How it works</h2>
+      <p>A BIP39 phrase is just a number. A 24-word phrase encodes 256 bits of entropy plus an 8-bit checksum; each word is 11 bits. Row <code>n</code> is the phrase whose entropy is <code>n</code>: the first words spell out the number, and the <em class="cs">last word</em> is chosen so its checksum bits match <code>SHA-256(entropy)</code>.</p>
+      <table class="spec">
+        <thead><tr><th>words</th><th>entropy</th><th>checksum</th><th>phrases</th></tr></thead>
+        <tbody id="spec"></tbody>
+      </table>
+      <p>For each phrase the BIP39 seed is derived (PBKDF2-HMAC-SHA512, 2048 rounds, empty passphrase), then the first address on these paths:</p>
+      <ul>
+        <li><b>BTC P2PKH uncompressed</b> and <b>compressed</b>: <code>m/44'/0'/0'/0/0</code></li>
+        <li><b>BTC P2WPKH (native segwit)</b>: <code>m/84'/0'/0'/0/0</code></li>
+        <li><b>ETH</b>: <code>m/44'/60'/0'/0/0</code></li>
+      </ul>
+      <h2>Should I scroll for coins?</h2>
+      <p>There are 2<sup>128</sup> 12-word phrases. Checking a billion per second, it would take about 10<sup>22</sup> years to see them all, roughly a trillion times the age of the universe. The chance that any row you'll ever look at holds coins is, for all purposes, zero. That's what keeps seed phrases safe.</p>
+      <p class="warn">Everything runs locally in your browser. Even so, never type a real seed phrase into any website.</p>
+    </section>
+  </main>
+  <script type="module" src="./src/home.js"></script>
+</body>
+</html>
